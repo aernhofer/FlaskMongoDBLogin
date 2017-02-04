@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user %}
+    <h1>Hi, {{ user.nickname }}!</h1>
+    {% else %}
+        <h1>Hi!</h1>
+        <a class="waves-effect waves-light btn" href="/login">Login</a>
+    {% endif %}
+    {% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+{% endblock %}
