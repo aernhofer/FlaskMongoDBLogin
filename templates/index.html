@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    {% if user %}
-    <h1>Hi, {{ user.nickname }}!</h1>
-    {% else %}
-        <h1>Hi!</h1>
-        <a class="waves-effect waves-light btn" href="/login">Login</a>
-    {% endif %}
+    <div class="greeting center">
+        {% if current_user.is_authenticated %}
+            <h1>Hi, {{ current_user.get_id() }}!</h1>
+            <a class="waves-effect waves-light btn red darken-3" href="/logout">Logout</a>
+        {% else %}
+            <h1>Hi!</h1>
+            <a class="waves-effect waves-light btn light-blue lighten-2" href="/login">Login</a>
+            <a class="waves-effect waves-light btn" href="/register">Register</a>
+        {% endif %}
+    </div>
     {% for post in posts %}
     <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}

@@ -1,28 +1,25 @@
+from flask_bcrypt import Bcrypt
+
+
 class User():
-    """An admin user capable of viewing reports.
 
-    :param str email: email address of user
-    :param str password: encrypted password for the user
+    def __init__(self, email):
+        self.email = email
 
-    """
-    #__tablename__ = 'user'
-
-    email = None
-    password = None
-    authenticated = None
-
-    def is_active(self):
-        """True, as all users are active."""
-        return True
-
-    def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
-        return self.email
+    Bcrypt(None)
 
     def is_authenticated(self):
-        """Return True if the user is authenticated."""
-        return self.authenticated
+        return True
+
+    def is_active(self):
+        return True
 
     def is_anonymous(self):
-        """False, as anonymous users aren't supported."""
         return False
+
+    def get_id(self):
+        return self.email
+
+    @staticmethod
+    def validate_login(password_hash, password):
+        return Bcrypt(None).check_password_hash(password_hash,password)

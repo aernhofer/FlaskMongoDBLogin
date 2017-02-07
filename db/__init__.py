@@ -41,6 +41,9 @@ class Database():
 
         return logged_in
 
+    def getUser(self,email):
+        return self.db.users.find_one({"email": email})
+
 #db = Database()
 #db.connect()
 #print(db.login('qwe@gmail.com','qwe'))

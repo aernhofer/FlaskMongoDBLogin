@@ -2,13 +2,14 @@
 <html>
   <head>
     {% if title %}
-    <title>{{ title }} - microblog</title>
+    <title>{{ title }}</title>
     {% else %}
-    <title>microblog</title>
+    <title>Kuba & Erni#s Site</title>
     {% endif %}
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,15 +18,9 @@
   <body>
     <div>Kuba & Erni sind super: <a href="/index">Home</a></div>
     <hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+
+    {% include "flash.html" %}
     {% block content %}{% endblock %}
+
   </body>
 </html>

@@ -1,0 +1,28 @@
+{% for error in get_flashed_messages(with_categories=true, category_filter=["error"]) %}
+<div class="alert alert-dismissable alert-danger" align="center">
+    <script>
+        // Materialize.toast(message, displayLength, className, completeCallback);
+        Materialize.toast('{{ error[1] }}', 4000, ' red lighten-1 rounded')
+    </script>
+</div>
+{% endfor %}
+{% for info in get_flashed_messages(with_categories=true, category_filter=["info"]) %}
+<div class="alert alert-dismissable alert-info" align="center">
+    <script>
+        // Materialize.toast(message, displayLength, className, completeCallback);
+        Materialize.toast('{{ info[1] }}', 4000, 'amber lighten-2 rounded')
+    </script>
+</div>
+{% endfor %}
+{% for success in get_flashed_messages(with_categories=true, category_filter=["success"]) %}
+<div class="alert alert-dismissable alert-success" align="center">
+    <!--
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ success[1] }}
+    -->
+    <script>
+        // Materialize.toast(message, displayLength, className, completeCallback);
+        Materialize.toast('{{ success[1] }}', 4000, 'light-green rounded')
+    </script>
+</div>
+{% endfor %}
