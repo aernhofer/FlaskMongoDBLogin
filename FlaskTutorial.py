@@ -15,3 +15,4 @@ db = Database()
 db.connect()
 
 import views
+import errorhandler

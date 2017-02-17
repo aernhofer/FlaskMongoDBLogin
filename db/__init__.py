@@ -1,6 +1,7 @@
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 from datetime import datetime
+from Users.User import User
 
 class Database():
 
@@ -13,15 +14,27 @@ class Database():
         self.db = self.dbClient.users
         self.users = self.db.users
 
-    def register(self,email,passwd):
+    def register(self,vname,nname,email,passwd):
         password_hash = self.bcrypt.generate_password_hash(passwd)
+
+        #TODO namen verarbeiten
 
         user = {
         "email": email,
-        "password": password_hash
+        "password": password_hash,
+        "lastLogin": datetime.utcnow(),
+        "registration": datetime.utcnow()
         }
 
-        self.users.insert_one(user)
+        if(vname != ""):
+            user['vname'] = vname
+        if(nname != ""):
+            user['nname'] = nname
+
+        print('registrating user: ')
+        print(user)
+
+        self.db.users.insert(user)
 
     def login(self,email,passwd):
 
@@ -42,7 +55,16 @@ class Database():
         return logged_in
 
     def getUser(self,email):
+        u = self.getUserJson(email)
+        if not u:
+            return None
+        return User(u['email'],u['lastLogin'])
+
+    def getUserJson(self,email):
         return self.db.users.find_one({"email": email})
+
+    def updateLastLogin(self,email):
+        self.db.users.update({"email": email}, {"$set":{"lastLogin": datetime.utcnow()}})
 
 #db = Database()
 #db.connect()

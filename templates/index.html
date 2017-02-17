@@ -3,6 +3,9 @@
     <div class="greeting center">
         {% if current_user.is_authenticated %}
             <h1>Hi, {{ current_user.get_id() }}!</h1>
+            <a class="waves-effect waves-light btn blue darken-1" 
+               href="{{ url_for('user', email=current_user.email) }}">
+               Your Profile</a>
             <a class="waves-effect waves-light btn red darken-3" href="/logout">Logout</a>
         {% else %}
             <h1>Hi!</h1>

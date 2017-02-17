@@ -1,8 +1,8 @@
 {% for error in get_flashed_messages(with_categories=true, category_filter=["error"]) %}
-<div class="alert alert-dismissable alert-danger" align="center">
+<div class="alert alert-dismissable alert-info" align="center">
     <script>
         // Materialize.toast(message, displayLength, className, completeCallback);
-        Materialize.toast('{{ error[1] }}', 4000, ' red lighten-1 rounded')
+        Materialize.toast('{{ error[1] }}', 4000, 'red lighten-1 rounded')
     </script>
 </div>
 {% endfor %}

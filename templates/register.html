@@ -1,47 +1,56 @@
 <!-- extend from base layout -->
-{% extends "base.html" %}
-
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col m6 offset-m3">
-                <h2 class="center-align">Register</h2>
-                <div class="row">
-                    <form method="post" name="login" class="col s12">
-                        {{ form.hidden_tag() }}
-                        <div class="row">
-                            <div class="input-field col m6 s12">
-                                {{ form.vname(size=80) }}
-                                <label for="vname">Vorname</label>
-                            </div>
-                            <div class="input-field col m6 s12">
-                                {{ form.nname(size=80) }}
-                                <label for="nname">Nachname</label>
-                            </div>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m6 offset-m3">
+            <h2 class="center-align">Register</h2>
+            <div class="row">
+                <form method="post" name="login" class="col s12">
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="input-field col m6 s12">
+                            {{ form.vname(size=80) }}
+                            <label for="vname">First Name</label>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ form.email(size=80) }}
-                                <label for="email">Email</label>
-                            </div>
+                        <div class="input-field col m6 s12">
+                            {{ form.nname(size=80) }}
+                            <label for="nname">Last Name</label>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ form.password(size=80) }}
-                                <label for="password">Password</label>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ form.email(size=80) }}
+                            {% for error in form.errors.email %}
+                            <br><span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                            <label for="email">Email</label>
                         </div>
-                        <div class="divider"></div>
-                        <div class="row">
-                            <div class="col m12">
-                                <p class="right-align">
-                                    <input type="submit" class="waves-effect waves-light btn" value="Sign In">
-                                </p>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ form.password(size=80) }}
+                            <label for="password">Password</label>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="divider"></div>
+                    <!--<div class="row">
+                          <p>
+                            {#{% for error in form.recaptcha.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            {{ form.recaptcha }}#}
+                          </p>
+                        </div>-->
+                    <div class="row">
+                        <div class="col m12">
+                            <p class="right-align">
+                                <input type="submit" class="waves-effect waves-light btn" value="Register">
+                            </p>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
