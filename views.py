@@ -6,8 +6,10 @@ from forms import LoginForm, RegisterForm
 from datetime import datetime
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        print(request.form['posttext'])
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},

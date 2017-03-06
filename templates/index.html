@@ -3,17 +3,26 @@
     <div class="greeting center">
         {% if current_user.is_authenticated %}
             <h1>Hi, {{ current_user.get_id() }}!</h1>
-            <a class="waves-effect waves-light btn blue darken-1" 
+            <a class="waves-effect waves-light btn blue darken-1"
                href="{{ url_for('user', email=current_user.email) }}">
                Your Profile</a>
-            <a class="waves-effect waves-light btn red darken-3" href="/logout">Logout</a>
+            <a class="waves-effect waves-light btn red darken-3" href="{{ url_for('logout') }}">Logout</a>
         {% else %}
             <h1>Hi!</h1>
-            <a class="waves-effect waves-light btn light-blue lighten-2" href="/login">Login</a>
-            <a class="waves-effect waves-light btn" href="/register">Register</a>
+            <a class="waves-effect waves-light btn light-blue lighten-2" href="{{ url_for('login') }}">Login</a>
+            <a class="waves-effect waves-light btn" href="{{ url_for('register') }}">Register</a>
         {% endif %}
     </div>
     {% for post in posts %}
     <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
+    {% if current_user.is_authenticated %}
+    <hr>
+    <div>
+      <form class="newpost" action="{{ url_for('index') }}" method="post">
+        <textarea style="width&#58;30%; overflow&#58;auto;" wrap="virtual" id="textarea" rows="15" cols="50" name="posttext"></textarea>
+        <input type="submit" name="post" value="Post"></input>
+      </form>
+    </div>
+    {% endif %}
 {% endblock %}

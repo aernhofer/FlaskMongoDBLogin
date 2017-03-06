@@ -1,17 +1,22 @@
 <!-- extend base layout -->
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <table>
     <tr valign="top">
         <td><img src="{{ user.avatar(128) }}"></td>
-        <td><h1>User: {{ user.email }}</h1><p>last Login: {{user.lastLogin}}</p></td>
+        <td>
+            <h1>User: {{ user.email }}</h1>
+            <p><em>Last Login:
+
+          <script>
+            document.write(moment.utc("{{ user.lastLogin }}").add(moment().utcOffset(),'minutes').calendar());
+          </script>
+
+        </em></p>
+        </td>
     </tr>
 </table>
-  <hr>
-  {% for post in posts %}
-  <p>
+<hr> {% for post in posts %}
+<p>
     {{ post.author.email }} says: <b>{{ post.body }}</b>
-  </p>
-  {% endfor %}
-{% endblock %}
+</p>
+{% endfor %} {% endblock %}
